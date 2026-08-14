@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>蓝雾冰团 · 个人主页</title>
+
+<style>
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        "Segoe UI",
+        "Microsoft YaHei",
+        sans-serif;
+    color:#24516d;
+    background:
+        radial-gradient(circle at 10% 10%,#dff7ff 0,transparent 28%),
+        radial-gradient(circle at 90% 80%,#d8f1ff 0,transparent 30%),
+        linear-gradient(135deg,#f9fdff,#eefaff);
+    overflow-x:hidden;
+}
+  .secret-box {
+    margin-top: 18px;
+}
+
+.secret-box input {
+    width: 240px;
+    padding: 12px 16px;
+
+    border: 1px solid #cfeefa;
+    border-radius: 15px;
+
+    outline: none;
+
+    background: rgba(255,255,255,.8);
+    color: #315b70;
+
+    font-size: 14px;
+
+    transition: .3s;
+}
+
+.secret-box input:focus {
+    border-color: #49b9e9;
+    box-shadow: 0 0 20px rgba(50,180,230,.2);
+}
+
+/* 背景 */
+.background{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+}
+
+.cloud{
+    position:absolute;
+    width:180px;
+    height:70px;
+    background:rgba(255,255,255,.65);
+    border-radius:100px;
+    filter:blur(1px);
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+    position:absolute;
+    background:inherit;
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:80px;
+    height:80px;
+    left:30px;
+    top:-35px;
+}
+
+.cloud:after{
+    width:100px;
+    height:100px;
+    right:20px;
+    top:-50px;
+}
+
+.cloud1{
+    top:18%;
+    left:-80px;
+    transform:scale(.8);
+}
+
+.cloud2{
+    top:55%;
+    right:-100px;
+    transform:scale(.65);
+}
+
+.star{
+    position:absolute;
+    color:#61c7f2;
+    font-size:20px;
+    animation:twinkle 2s infinite alternate;
+}
+
+.s1{top:18%;left:18%}
+.s2{top:35%;right:15%;animation-delay:.5s}
+.s3{top:70%;left:12%;animation-delay:1s}
+.s4{top:80%;right:20%;animation-delay:1.5s}
+
+@keyframes twinkle{
+    from{opacity:.3;transform:scale(.8)}
+    to{opacity:1;transform:scale(1.2)}
+}
+
+/* 导航 */
+nav{
+    position:sticky;
+    top:15px;
+    z-index:10;
+
+    width:90%;
+    max-width:1100px;
+    margin:15px auto;
+
+    padding:14px 22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.9);
+    border-radius:22px;
+
+    box-shadow:0 12px 40px rgba(65,157,205,.12);
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    color:#159bd5;
+}
+
+.logo span{
+    color:#7ad5f6;
+}
+
+nav a{
+    text-decoration:none;
+    color:#50768b;
+    margin-left:22px;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#119bd9;
+}
+
+/* Hero */
+.hero{
+    width:90%;
+    max-width:1100px;
+    min-height:650px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.badge{
+    display:inline-block;
+    padding:9px 15px;
+    border-radius:30px;
+
+    color:#129bd6;
+    background:#e2f7ff;
+
+    font-size:13px;
+    margin-bottom:22px;
+
+    box-shadow:0 8px 20px rgba(50,170,220,.1);
+}
+
+h1{
+    font-size:clamp(48px,8vw,82px);
+    line-height:.95;
+    color:#1e526f;
+}
+
+h1 span{
+    color:#27a9e3;
+}
+
+.hero-text h2{
+    margin-top:20px;
+    font-size:20px;
+    color:#56839b;
+    font-weight:500;
+}
+
+.hero-text p{
+    max-width:570px;
+    margin-top:18px;
+
+    color:#7795a6;
+    line-height:1.9;
+    font-size:15px;
+}
+
+.buttons{
+    margin-top:30px;
+}
+
+.btn{
+    display:inline-block;
+    padding:13px 22px;
+    margin-right:8px;
+
+    border-radius:16px;
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+.primary{
+    color:white;
+    background:linear-gradient(135deg,#4cc4f2,#1596d1);
+    box-shadow:0 12px 28px rgba(28,157,215,.25);
+}
+
+.secondary{
+    color:#228fbe;
+    background:white;
+    border:1px solid #d5effa;
+}
+
+.btn:hover{
+    transform:translateY(-5px);
+}
+  .secret-mode {
+    filter: grayscale(100%);
+    background: #111 !important;
+}
+
+.secret-mode * {
+    color: #000 !important;
+    border-color: #333 !important;
+}
+
+.secret-mode input {
+    background: #222 !important;
+    color: white !important;
+}
+
+.secret-mode .avatar {
+    background: #111 !important;
+    box-shadow: 0 0 40px rgba(255,255,255,.15);
+    font-size: 100px;
+  }
+
+/* 头像区域 */
+.avatar-area{
+    width:390px;
+    height:390px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        radial-gradient(circle,#fff 0 25%,transparent 26%),
+        linear-gradient(145deg,#dff8ff,#a7e4fb);
+
+    border-radius:
+        45% 55% 50% 50% /
+        50% 45% 55% 50%;
+
+    box-shadow:
+        inset 0 0 60px rgba(255,255,255,.9),
+        0 30px 70px rgba(45,158,211,.2);
+
+    animation:float 4s ease-in-out infinite;
+}
+
+.avatar{
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:90px;
+
+    box-shadow:
+        0 20px 50px rgba(48,150,195,.15);
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+/* 通用 */
+section{
+    width:90%;
+    max-width:1100px;
+    margin:100px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    font-size:35px;
+    color:#24536d;
+}
+
+.section-title p{
+    margin-top:10px;
+    color:#86a3b2;
+}
+
+/* 关于我 */
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.info-card{
+    padding:30px;
+
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:27px;
+
+    box-shadow:0 18px 45px rgba(45,155,205,.1);
+
+    transition:.35s;
+}
+
+.info-card:hover{
+    transform:translateY(-7px);
+}
+
+.info-card h3{
+    color:#248db9;
+    margin-bottom:15px;
+}
+
+.info-card p{
+    color:#7895a5;
+    line-height:1.9;
+}
+
+/* 技能 */
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:13px;
+}
+
+.skill{
+    padding:12px 19px;
+
+    background:white;
+    border-radius:30px;
+
+    color:#3e91b5;
+
+    border:1px solid #d9f2fc;
+
+    box-shadow:0 8px 20px rgba(48,158,205,.08);
+
+    transition:.3s;
+}
+
+.skill:hover{
+    transform:translateY(-5px) rotate(-2deg);
+    background:#e8f8ff;
+}
+
+/* 项目 */
+.projects{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+    gap:20px;
+}
+
+.project{
+    padding:25px;
+
+    background:rgba(255,255,255,.76);
+    backdrop-filter:blur(20px);
+
+    border-radius:25px;
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:0 15px 40px rgba(50,150,200,.1);
+
+    transition:.35s;
+}
+
+.project:hover{
+    transform:translateY(-8px);
+}
+
+.project-icon{
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    border-radius:17px;
+
+    background:#e2f7ff;
+
+    margin-bottom:18px;
+}
+
+.project h3{
+    color:#28627f;
+    margin-bottom:10px;
+}
+
+.project p{
+    color:#7895a5;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* 联系 */
+.contact{
+    text-align:center;
+
+    padding:55px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(220,247,255,.85),
+            rgba(255,255,255,.85)
+        );
+
+    border-radius:35px;
+
+    border:1px solid white;
+
+    box-shadow:
+        0 20px 60px rgba(45,155,205,.13);
+}
+
+.contact h2{
+    font-size:35px;
+    color:#205772;
+}
+
+.contact p{
+    margin:15px auto 25px;
+    color:#7895a5;
+}
+
+/* 页脚 */
+footer{
+    text-align:center;
+    padding:35px 20px 45px;
+    color:#8eabb9;
+    font-size:13px;
+}
+
+/* 手机 */
+@media(max-width:800px){
+
+    nav{
+        padding:13px 16px;
+    }
+
+    nav div:last-child{
+        display:none;
+    }
+
+    .hero{
+        flex-direction:column-reverse;
+        text-align:center;
+        padding:70px 0;
+    }
+
+    .hero-text p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .avatar-area{
+        width:280px;
+        height:280px;
+    }
+
+    .avatar{
+        width:160px;
+        height:160px;
+        font-size:65px;
+    }
+
+    .about{
+        grid-template-columns:1fr;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        margin:70px auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+
+    <div class="star s1">✦</div>
+    <div class="star s2">✧</div>
+    <div class="star s3">✦</div>
+    <div class="star s4">✧</div>
+</div>
+
+<!-- 导航 -->
+<nav>
+    <div class="logo">
+        蓝雾冰团<span> ·</span> Personal
+    </div>
+
+    <div>
+        <a href="#home">首页</a>
+        <a href="#about">关于我</a>
+        <a href="#skills">技能</a>
+        <a href="#projects">项目</a>
+        <a href="#contact">联系</a>
+    </div>
+</nav>
+
+
+<!-- 首页 -->
+<main id="home">
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <div class="badge">
+            ✨ Welcome to my little world
+        </div>
+
+        <h1>
+            Hi，<br>
+            我是<span>蓝雾冰团</span>
+        </h1>
+
+        <h2>
+            一个喜欢创造与探索的数字玩家 ☁️
+        </h2>
+
+        <p>
+            欢迎来到我的个人空间
+            我喜欢研究科技、设计有趣的东西，
+            也喜欢把脑海里的想法一点一点变成现实。
+        </p>
+
+        <div class="buttons">
+            <a href="#about" class="btn primary">
+                认识一下 →
+            </a>
+
+            <a href="#projects" class="btn secondary">
+                我的项目
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="avatar-area">
+
+        <div class="avatar">
+    <img src="avatar.png" alt="我的头像">
+</div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- 关于 -->
+<section id="about">
+
+    <div class="section-title">
+        <h2>🌊 关于我</h2>
+        <p>一点点关于我的介绍</p>
+    </div>
+
+    <div class="about">
+
+        <div class="info-card">
+
+            <h3>☁️ 我是谁？</h3>
+
+            <p>
+                我是蓝雾冰团，一个喜欢折腾科技、
+                网站、软件和各种有趣项目的人
+                对新鲜事物保持好奇，
+                喜欢把简单的东西做得更有趣
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>💫 我的理念</h3>
+
+            <p>
+                保持好奇，持续创造
+                不一定要成为最厉害的人，
+                但希望每天都能比昨天多懂一点点。
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 技能 -->
+<section id="skills">
+
+    <div class="section-title">
+
+        <h2>🛠️ 我的技能</h2>
+
+        <p>
+            正在不断学习中的技能树
+        </p>
+
+    </div>
+
+
+    <div class="skills">
+
+        <div class="skill">🌐 HTML</div>
+        <div class="skill">🎨 CSS</div>
+        <div class="skill">⚡ JavaScript</div>
+        <div class="skill">📱 Android</div>
+        <div class="skill">💻 Kotlin</div>
+        <div class="skill">🎮 游戏</div>
+        <div class="skill">🎨 UI Design</div>
+        <div class="skill">✨ Creative</div>
+
+    </div>
+
+</section>
+
+
+<!-- 项目 -->
+<section id="projects">
+
+    <div class="section-title">
+
+        <h2>🚀 我的项目</h2>
+
+        <p>
+            一些正在探索的小东西
+        </p>
+
+    </div>
+
+
+    <div class="projects">
+
+        <div class="project">
+
+            <div class="project-icon">
+                🌐
+            </div>
+
+            <h3>个人网站</h3>
+
+            <p>
+                感谢北冥参与开发
+                
+                
+            </p>
+
+        </div>
+
+
+        <div class="project">
+
+            <div class="project-icon">
+                📱
+            </div>
+
+            <h3>Android 项目</h3>
+
+            <p>
+                尝试制作各种 Android
+                小工具和有趣的移动端应用
+            </p>
+
+        </div>
+
+
+        <div class="project">
+
+            <div class="project-icon">
+                📦
+            </div>
+
+            <h3>仓库</h3>
+
+            <p>
+                这里存放各种奇奇怪怪的东西，
+                仓库链接:https://1823577049.
+                share.123pan.cn/123pan/3uWFjv-MrY2d
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 联系 -->
+<section id="contact">
+
+    <div class="contact">
+
+        <h2>💙 找到我</h2>
+
+        <p>
+            如果你也喜欢科技、设计和有趣的东西，
+            欢迎和我交流。
+        </p>
+
+        <button class="btn primary" onclick="copyEmail()">
+    ✉️ 复制我的邮箱
+        </button>
+<div class="secret-box">
+    <input
+        type="text"
+        id="secretInput"
+        placeholder="请输入文本（不是BUG）"
+        oninput="checkSecret()"
+    >
+</div>
+    </div>
+
+</section>
+  <script>
+function checkSecret() {
+    const input = document.getElementById("secretInput");
+
+    if (input.value === "老麦") {
+        document.body.classList.add("secret-mode");
+
+        // 替换所有文本
+        document.querySelectorAll("body *").forEach(element => {
+            if (
+                element.children.length === 0 &&
+                element.tagName !== "INPUT" &&
+                element.tagName !== "BUTTON"
+            ) {
+                if (element.innerText.trim() !== "") {
+                    element.innerText = "你是谁";
+                }
+            }
+        });
+
+        // 头像变成眼睛
+        const avatar = document.querySelector(".avatar");
+
+        if (avatar) {
+            avatar.innerHTML = "👁️";
+        }
+    }
+}
+                    </script>
+
+
+<footer>
+
+    © 2026 蓝雾冰团 · Made with 💙 & ☁️
+
+</footer>
+
+  <script>
+function copyEmail() {
+    const email = "fxcl_2024@qq.com";
+
+    navigator.clipboard.writeText(email).then(() => {
+        alert("邮箱已复制：\n" + email);
+    }).catch(() => {
+        alert("我的邮箱：\n" + email);
+    });
+}
+  </script>
+</body>
+</html>
